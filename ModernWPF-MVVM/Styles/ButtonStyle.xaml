@@ -1,0 +1,224 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--ButtonCloseStyle-->
+    <ImageBrush ImageSource="../img/closedOff.png" x:Key="closedOff"/>
+    <ImageBrush ImageSource="../img/closedOn.png" x:Key="closedOn"/>
+    
+    <Style x:Key="ButtonCloseStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource closedOff}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource closedOn}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource closedOn}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonMinimazeStyle-->
+    <ImageBrush ImageSource="../img/minimizeOff.png" x:Key="minimazeOff"/>
+    <ImageBrush ImageSource="../img/minimizeOn.png" x:Key="minimazeOn"/>
+    
+    <Style x:Key="ButtonMinimazeStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="10 10 0 10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource minimazeOff}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource minimazeOn}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource minimazeOn}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonNormalMaximizedStyle-->
+    <ImageBrush ImageSource="../img/normalWindowIcons/GroupPassive.png" x:Key="normMaxOff"/>
+    <ImageBrush ImageSource="../img/normalWindowIcons/GroupActive.png" x:Key="normMaxOn"/>
+    
+    <Style x:Key="ButtonNormalMaximizedStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="10 10 0 10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource normMaxOff}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource normMaxOn}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource normMaxOn}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonAddStyle-->
+    
+    <Style x:Key="ButtonAddStyle" TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0 15 0 0"/>
+        <Setter Property="Padding" Value="8 5 8 5"/>
+        <Setter Property="Background" Value="#FDB87D"/>
+        <Setter Property="BorderBrush" Value="#A79382"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Roboto"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Heavy"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" 
+                            CornerRadius="8"
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" 
+                                          Focusable="False" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="{TemplateBinding Padding}" 
+                                          RecognizesAccessKey="True" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFAD66"/>
+                        </Trigger>
+                        <!--<Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFA151"/>
+                        </Trigger>-->
+
+                        <!--АНИМАЦИЯ НАЖАТИЯ-->
+                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.05" To="0 17 0 0"/>
+                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"
+                                                            Duration="0:0:0.05" To="0 0 0 0"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                                    To="#FFA151" Duration="0:0:0.01" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <!--АНИМАЦИЯ ОБРАТНО В ДЕФОЛТ-->
+
+                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.05" To="0 15 0 0"/>
+                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"
+                                                            Duration="0:0:0.05" To="0 0 0 2"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                                    To="#FFAD66" Duration="0:0:0.05" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonDeleteGridStyle-->
+    <ImageBrush ImageSource="../img/deleteIconsGrid/trashPassive.png" x:Key="DeleteGridOff"/>
+    <ImageBrush ImageSource="../img/deleteIconsGrid/trashActive.png" x:Key="DeleteGridOn"/>
+    
+    <Style x:Key="ButtonDeleteGridStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="15"/>
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource DeleteGridOff}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource DeleteGridOn}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource DeleteGridOn}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonEditGridStyle-->
+    <ImageBrush ImageSource="../img/editIconsGrid/editPassive.png" x:Key="editGridOff"/>
+    <ImageBrush ImageSource="../img/editIconsGrid/editActive.png" x:Key="editGridOn"/>
+
+    <Style x:Key="ButtonEditGridStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="15"/>
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource editGridOff}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource editGridOn}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource editGridOn}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>
