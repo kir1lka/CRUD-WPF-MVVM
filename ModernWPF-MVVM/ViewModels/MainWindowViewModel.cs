@@ -1,10 +1,12 @@
-﻿using ModernWPF_MVVM.Commands;
+﻿using ModernWPF_MVVM.Castom;
+using ModernWPF_MVVM.Commands;
 using ModernWPF_MVVM.Models;
 using ModernWPF_MVVM.Repositories;
 using ModernWPF_MVVM.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ModernWPF_MVVM.ViewModels
 {
@@ -50,6 +52,16 @@ namespace ModernWPF_MVVM.ViewModels
         }
         #endregion
 
+        #region SelectedItemGrid
+        private Person _selectedItemGrid;
+
+        public Person SelectedItemGrid
+        {
+            get { return _selectedItemGrid; }
+            set { Set(ref _selectedItemGrid, value); }
+        }
+        #endregion
+
         /// 
         /// Команды
         /// 
@@ -92,6 +104,46 @@ namespace ModernWPF_MVVM.ViewModels
         private bool CanNormMaxApplicationCommandExecute(object p) => true;
         #endregion
 
+        #region AddPersonCommand
+        public ICommand AddPersonCommand { get; }
+
+        private void OnAddPersonCommandExecute(object p)
+        {
+            var personNew = new Person
+            {
+                Id = 10,
+                Name = "123",
+                Adress = "123",
+                Number = "123",
+            };
+
+            Persons.Add(personNew);
+
+            MessageBoxCastom.SuccessWithColoredName("Пользователь ", personNew.Name.Trim(), Brushes.Red, " добавлен!");
+        }
+
+        private bool CanAddPersonCommandExecute(object p) => true;
+        #endregion
+
+        #region DeletePersonCommand
+        public ICommand DeletePersonCommand { get; }
+
+        private void OnDeletePersonCommandExecute(object p)
+        {
+            if (!(p is Person person)) return;
+
+            MessageBoxCastom.SuccessWithColoredName("Пользователь ", person.Name.Trim(), Brushes.Red, " удален!");
+
+            var index_group = Persons.IndexOf(person);
+            Persons.Remove(person);
+
+        }
+
+        private bool CanDeletePersonCommandExecute(object p) => true;
+        #endregion
+
+
+
         public MainWindowViewModel()
         {
             //заполнение таблицы
@@ -102,6 +154,9 @@ namespace ModernWPF_MVVM.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecute, CanCloseApplicationCommandExecute);
             MinimizeApplicationCommand = new LambdaCommand(OnMinimizeApplicationCommandExecute, CanMinimizeApplicationCommandExecute);
             NormMaxApplicationCommand = new LambdaCommand(OnNormMaxApplicationCommandExecute, CanNormMaxApplicationCommandExecute);
+
+            AddPersonCommand = new LambdaCommand(OnAddPersonCommandExecute, CanAddPersonCommandExecute);
+            DeletePersonCommand = new LambdaCommand(OnDeletePersonCommandExecute, CanDeletePersonCommandExecute);
 
             //панель задач не скрывается
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;

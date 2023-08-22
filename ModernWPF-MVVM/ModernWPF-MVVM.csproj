@@ -80,6 +80,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Castom\MessageBoxCastom.cs" />
+    <Compile Include="ViewModels\MessageBoxViewModel.cs" />
+    <Compile Include="Views\Window\AddNewPersonWindow.xaml.cs">
+      <DependentUpon>AddNewPersonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window\EditPersonWindow.xaml.cs">
+      <DependentUpon>EditPersonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window\MessageBoxWindow.xaml.cs">
+      <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,7 +107,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Views\Window\AddNewPersonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window\EditPersonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -111,10 +130,14 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
+    <Compile Include="Views\Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Window\MessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -148,7 +171,7 @@
     <Resource Include="img\deleteIconsGrid\trashPassive.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\closedOn.png" />
+    <Resource Include="img\closedIcons\closedOn.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\background.jpg" />
@@ -157,11 +180,11 @@
     <Resource Include="img\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\closedOff.png" />
+    <Resource Include="img\closedIcons\closedOff.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\minimizeOff.png" />
-    <Resource Include="img\minimizeOn.png" />
+    <Resource Include="img\minimizeIcons\minimizeOff.png" />
+    <Resource Include="img\minimizeIcons\minimizeOn.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\editIconsGrid\editActive.png" />

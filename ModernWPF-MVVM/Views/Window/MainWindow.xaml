@@ -7,11 +7,9 @@
         mc:Ignorable="d"
         
         xmlns:fa="http://schemas.fontawesome.io/icons/"
-        
         xmlns:vm="clr-namespace:ModernWPF_MVVM.ViewModels"
         
         Title="MainWindow" Height="450" Width="800"
-        
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
@@ -20,8 +18,8 @@
         
         MinHeight="450"
         MinWidth="570"
-        MaxHeight="{Binding MaxHeight}"
         
+        MaxHeight="{Binding MaxHeight}"
         WindowState="{Binding WindowState}"
         
         MouseDown="Window_MouseDown"
@@ -39,10 +37,11 @@
             x:Name="borderHeader">
 
         <Border.Background>
-            <ImageBrush ImageSource="../img/background.jpg" Stretch="None"/>
+            <ImageBrush ImageSource="../../img/background.jpg" Stretch="None"/>
         </Border.Background>
 
         <Grid>
+            
             <!--СЕТКА-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
@@ -66,44 +65,17 @@
                 <Button Cursor="Hand"
                         x:Name="BtnCMinimaze"
                         Command="{Binding MinimizeApplicationCommand}"
-                        Style="{StaticResource ButtonMinimazeStyle}">
-
-                    <!--<Button.BitmapEffect>
-                        <DropShadowBitmapEffect Color="#A79382" 
-                                                Direction="-80"
-                                                Softness="0" 
-                                                ShadowDepth="1.5" 
-                                                Opacity="0.6"/>
-                    </Button.BitmapEffect>-->
-                </Button>
+                        Style="{StaticResource ButtonMinimazeStyle}"/>
 
                 <Button Cursor="Hand"
                         x:Name="BtnNormMax"
                         Command="{Binding NormMaxApplicationCommand}"
-                        Style="{StaticResource ButtonNormalMaximizedStyle}">
-
-                    <!--<Button.BitmapEffect>
-                        <DropShadowBitmapEffect Color="#A79382" 
-                                                Direction="-80"
-                                                Softness="0" 
-                                                ShadowDepth="1.5" 
-                                                Opacity="0.6"/>
-                    </Button.BitmapEffect>-->
-                </Button>
+                        Style="{StaticResource ButtonNormalMaximizedStyle}"/>
 
                 <Button Cursor="Hand"
                         x:Name="BtnClose"
                         Command="{Binding CloseApplicationCommand}"
-                        Style="{StaticResource ButtonCloseStyle}">
-
-                    <!--<Button.BitmapEffect>
-                        <DropShadowBitmapEffect Color="#A79382" 
-                                                Direction="-80"
-                                                Softness="0" 
-                                                ShadowDepth="1.5" 
-                                                Opacity="0.6"/>
-                    </Button.BitmapEffect>-->
-                </Button>
+                        Style="{StaticResource ButtonCloseStyle}"/>
 
             </StackPanel>
 
@@ -112,10 +84,11 @@
                   Grid.Column="1">
 
                 <!--TEXTBOX SEARCH-->
-                <StackPanel Margin="0 4 0 0"
-                            HorizontalAlignment="Left">
+                <StackPanel Margin="0 0 0 0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center">
                     
-                    <Grid Margin="0 0 0 10" 
+                    <Grid Margin="0 0 0 0" 
                           Grid.Row="0"
                           Grid.ColumnSpan="2">
 
@@ -134,45 +107,6 @@
                                              HorizontalAlignment="Left"
                                              Margin="10 0 0 1"/>
                         </Grid>
-
-                        <!--<StackPanel Grid.Column="0"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                                Orientation="Horizontal">
-
-                            <TextBlock Text="text" 
-                                   TextAlignment="Center"
-                                   FontFamily="Roboto"
-                                   FontWeight="Medium"
-                                   FontSize="25"
-                                   Foreground="#FDB87D"
-                                   Margin="0 0 5 0">
-                                <TextBlock.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="#A79382" 
-                                                        Direction="-80"
-                                                        Softness="0" 
-                                                        ShadowDepth="1.5" 
-                                                        Opacity="0.6"/>
-                                </TextBlock.BitmapEffect>
-
-                            </TextBlock>
-                            <TextBlock TextAlignment="Center"
-                                   FontFamily="Roboto"
-                                   FontSize="25"
-                                   Foreground="White"
-                                   FontWeight="Heavy">
-                            
-                                <Border Background="#FDB87D"
-                                        Width="90"
-                                        CornerRadius="8"
-                                        BorderBrush="#A79382"
-                                        BorderThickness="0 0 0 2">
-                                    <TextBlock>
-                                        Labele
-                                    </TextBlock>
-                                </Border>
-                            </TextBlock>
-                        </StackPanel>-->
                     </Grid>
                 </StackPanel>
             </Grid>
@@ -181,16 +115,22 @@
             <Grid Grid.Row="2"
                   Grid.Column="1">
 
-                <DataGrid FontFamily="Roboto"
+                <DataGrid 
+                          FontFamily="Roboto"
                           Style="{StaticResource DataGridStyle1}"
                           ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle1}"
                           CellStyle="{StaticResource DataGridCellStyle1}"
                           RowStyle="{StaticResource DataGridRowStyle1}"
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding Persons}"
+                          SelectedItem="{Binding SelectedItemGrid}"
                           >
 
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id"
+                                            IsReadOnly="True"
+                                            Width="0.3*"
+                                            Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Пользователь"
                                             IsReadOnly="True"
                                             Width="*"
@@ -210,7 +150,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Right">
+                                                HorizontalAlignment="Center">
                                         <Button x:Name="BtnEdit" 
                                                 Cursor="Hand"
                                                 Style="{StaticResource ButtonEditGridStyle}"
@@ -218,7 +158,8 @@
                                         <Button x:Name="BtnDelete"
                                                 Cursor="Hand"
                                                 Style="{StaticResource ButtonDeleteGridStyle}"
-                                                />
+                                                Command="{Binding Path=DataContext.DeletePersonCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                CommandParameter="{Binding Path=DataContext.SelectedItemGrid, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -230,6 +171,7 @@
 
             </Grid>
 
+            <!--bottom-->
             <Grid Grid.Row="3"
                   Grid.Column="1">
 
@@ -238,13 +180,10 @@
 
                     <Button Content="Добавить"
                             Style="{StaticResource ButtonAddStyle}"
-                            Cursor="Hand"/>
-
+                            Cursor="Hand"
+                            Command="{Binding AddPersonCommand}"/>
                 </StackPanel>
-                
             </Grid>
-
-            
         </Grid>
     </Border>
 </Window>

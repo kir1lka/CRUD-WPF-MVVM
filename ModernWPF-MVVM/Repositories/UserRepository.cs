@@ -12,7 +12,6 @@ namespace ModernWPF_MVVM.Repositories
         {
             var users = new ObservableCollection<Person>();
 
-            //using (var connection = GetConnection())
             using (var connection = GetConnection())
             using (var command = new SqlCommand())
             {

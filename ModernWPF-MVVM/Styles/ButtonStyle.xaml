@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--ButtonCloseStyle-->
-    <ImageBrush ImageSource="../img/closedOff.png" x:Key="closedOff"/>
-    <ImageBrush ImageSource="../img/closedOn.png" x:Key="closedOn"/>
+    <ImageBrush ImageSource="../img/closedIcons/closedOff.png" x:Key="closedOff"/>
+    <ImageBrush ImageSource="../img/closedIcons/closedOn.png" x:Key="closedOn"/>
     
     <Style x:Key="ButtonCloseStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="20"/>
@@ -31,8 +31,8 @@
     </Style>
 
     <!--ButtonMinimazeStyle-->
-    <ImageBrush ImageSource="../img/minimizeOff.png" x:Key="minimazeOff"/>
-    <ImageBrush ImageSource="../img/minimizeOn.png" x:Key="minimazeOn"/>
+    <ImageBrush ImageSource="../img/minimizeIcons/minimizeOff.png" x:Key="minimazeOff"/>
+    <ImageBrush ImageSource="../img/minimizeIcons/minimizeOn.png" x:Key="minimazeOn"/>
     
     <Style x:Key="ButtonMinimazeStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="20"/>
@@ -148,6 +148,80 @@
                                 <Storyboard>
                                     <ThicknessAnimation Storyboard.TargetProperty="Margin"
                                                             Duration="0:0:0.05" To="0 15 0 0"/>
+                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"
+                                                            Duration="0:0:0.05" To="0 0 0 2"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                                    To="#FFAD66" Duration="0:0:0.05" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonGoodMessageBoxButtonStyle-->
+
+    <Style x:Key="ButtonGoodMessageBoxButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0 0 15 15"/>
+        <Setter Property="Padding" Value="8 5 8 5"/>
+        <Setter Property="Background" Value="#FDB87D"/>
+        <Setter Property="BorderBrush" Value="#A79382"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Roboto"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Heavy"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" 
+                            CornerRadius="8"
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" 
+                                          Focusable="False" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="{TemplateBinding Padding}" 
+                                          RecognizesAccessKey="True" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFAD66"/>
+                        </Trigger>
+                        <!--<Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFA151"/>
+                        </Trigger>-->
+
+                        <!--АНИМАЦИЯ НАЖАТИЯ-->
+                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.05" To="0 0 17 15"/>
+                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"
+                                                            Duration="0:0:0.05" To="0 0 0 0"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                                    To="#FFA151" Duration="0:0:0.01" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <!--АНИМАЦИЯ ОБРАТНО В ДЕФОЛТ-->
+
+                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.05" To="0 0 15 15"/>
                                     <ThicknessAnimation Storyboard.TargetProperty="BorderThickness"
                                                             Duration="0:0:0.05" To="0 0 0 2"/>
                                     <ColorAnimation Storyboard.TargetProperty="Background.Color"
