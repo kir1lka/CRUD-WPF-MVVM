@@ -55,7 +55,7 @@
                         <TextBlock Text="Оповещение" 
                                    TextAlignment="Center"
                                    FontFamily="Roboto"
-                                   FontWeight="Medium"
+                                   FontWeight="Heavy"
                                    FontSize="20"
                                    Foreground="#FDB87D"
                                    Margin="5">
@@ -99,19 +99,20 @@
 
                         <TextBlock Text="{Binding StartText}" 
                                    FontWeight="Bold"
-                                   FontFamily="Montserrat"
-                                   FontSize="15"/>
-                        
+                                   FontFamily="Roboto"
+                                   FontSize="20"/>
+
                         <TextBlock Text="{Binding Name}"
-                                   FontWeight="Bold"
-                                   FontFamily="Montserrat"
-                                   Foreground="{Binding NameColor}" 
-                                   FontSize="15"/>
+                                   TextAlignment="Center"
+                                   FontFamily="Roboto"
+                                   FontWeight="Heavy"
+                                   FontSize="20"
+                                   Foreground="#FF0000"/>
 
                         <TextBlock Text="{Binding AdditionalText}" 
                                    FontWeight="Bold"
-                                   FontFamily="Montserrat"
-                                   FontSize="15"/>
+                                   FontFamily="Roboto"
+                                   FontSize="20"/>
                     </StackPanel>
                     
                     <!--<TextBlock HorizontalAlignment="Center"

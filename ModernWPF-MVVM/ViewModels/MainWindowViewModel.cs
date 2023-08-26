@@ -4,7 +4,9 @@ using ModernWPF_MVVM.Models;
 using ModernWPF_MVVM.Repositories;
 using ModernWPF_MVVM.ViewModels.Base;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -59,6 +61,30 @@ namespace ModernWPF_MVVM.ViewModels
         {
             get { return _selectedItemGrid; }
             set { Set(ref _selectedItemGrid, value); }
+        }
+        #endregion
+
+        #region SearchValue
+        private string _searchValue;
+
+        public string SearchValue
+        {
+            get { return _searchValue; }
+            set
+            {
+                Set(ref _searchValue, value);
+                PersonCollection.Filter = FilterByName;
+            }
+        }
+        #endregion
+
+        #region PersonCollection-ICollectionView
+        private ICollectionView _personCollection;
+
+        public ICollectionView PersonCollection
+        {
+            get { return _personCollection; }
+            set { Set(ref _personCollection, value); }
         }
         #endregion
 
@@ -149,6 +175,9 @@ namespace ModernWPF_MVVM.ViewModels
             //заполнение таблицы
             UserRepository userRepository = new UserRepository();
             Persons = new ObservableCollection<Person>(userRepository.GetAllUsers());
+            PersonCollection = CollectionViewSource.GetDefaultView(Persons);
+
+            PersonCollection.Filter = FilterByName;
 
             //команды
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecute, CanCloseApplicationCommandExecute);
@@ -162,6 +191,17 @@ namespace ModernWPF_MVVM.ViewModels
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
+        #region Methods
+        private bool FilterByName(object obj)
+        {
+            if (!string.IsNullOrEmpty(SearchValue))
+            {
+                var person = obj as Person;
+                return person != null && person.Name.ToLower().Contains(SearchValue.ToLower());
+            }
 
+            return true;
+        }
+        #endregion
     }
 }
