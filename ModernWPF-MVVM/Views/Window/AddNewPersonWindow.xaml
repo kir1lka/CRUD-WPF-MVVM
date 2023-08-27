@@ -12,7 +12,7 @@
         Title="AddNewPersonWindow" 
         Name="window"
         
-        Height="400" Width="350"
+        Height="300" Width="350"
         
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -29,11 +29,13 @@
             BorderThickness="2"
             BorderBrush="#FDB87D"
             x:Name="borderHeader">
-
+        
+        <!--Background-->
         <Border.Background>
             <ImageBrush ImageSource="../../img/background.jpg" Stretch="None"/>
         </Border.Background>
 
+        <!--top-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
@@ -72,15 +74,14 @@
                             Command="{Binding OkButtonCommand}"
                             CommandParameter="{Binding ElementName=window}">
                 </Button>
-
-
             </Grid>
 
+            <!--main-->
             <Grid Grid.Row="1">
                 
                 <StackPanel Orientation="Vertical"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Center">
 
                     <!--<TextBlock Text="Новый пользователь" 
                                TextAlignment="Left"

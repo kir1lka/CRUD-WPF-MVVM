@@ -6,6 +6,7 @@ using ModernWPF_MVVM.ViewModels.Base;
 using ModernWPF_MVVM.Views.Window;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -168,7 +169,58 @@ namespace ModernWPF_MVVM.ViewModels
         private bool CanDeletePersonCommandExecute(object p) => true;
         #endregion
 
+        #region EditPersonCommand
+        public ICommand EditPersonCommand { get; }
 
+        private void OnEditPersonCommandExecute(object p)
+        {
+            EditPersonViewModel editPersonViewModel = new EditPersonViewModel();
+            editPersonViewModel.PersonToEdit = SelectedItemGrid;
+            editPersonViewModel.PersonEdited += EditPersonViewModel_PersonEdited; // Подписка на событие
+            EditPersonWindow editPersonWindow = new EditPersonWindow
+            {
+                DataContext = editPersonViewModel
+            };
+            editPersonWindow.ShowDialog();
+        }
+
+        private bool CanEditPersonCommandExecute(object p) => true;
+        #endregion
+
+        ///
+        /// Methods for events
+        ///
+
+        #region FilterByName 
+        private bool FilterByName(object obj)
+        {
+            if (!string.IsNullOrEmpty(SearchValue) && obj is Person person) return person != null && person.Name.ToLower().Contains(SearchValue.ToLower());
+            return true;
+        }
+        #endregion
+
+        #region AddNewPersonViewModel_PersonAdded
+        private void AddNewPersonViewModel_PersonAdded(object sender, Person person)
+        {
+            Persons.Add(person);
+            PersonCollection.Refresh();
+        }
+        #endregion
+
+        #region EditPersonViewModel_PersonEdited
+        private void EditPersonViewModel_PersonEdited(object sender, Person person)
+        {
+            // Найдите редактируемого пользователя в коллекции Persons и обновите его данные
+            var existingPerson = Persons.FirstOrDefault(p => p.Id == person.Id);
+            if (existingPerson != null)
+            {
+                existingPerson.Name = person.Name;
+                existingPerson.Adress = person.Adress;
+                existingPerson.Number = person.Number;
+                PersonCollection.Refresh();
+            }
+        }
+        #endregion
 
         public MainWindowViewModel()
         {
@@ -187,22 +239,12 @@ namespace ModernWPF_MVVM.ViewModels
 
             AddPersonCommand = new LambdaCommand(OnAddPersonCommandExecute, CanAddPersonCommandExecute);
             DeletePersonCommand = new LambdaCommand(OnDeletePersonCommandExecute, CanDeletePersonCommandExecute);
+            EditPersonCommand = new LambdaCommand(OnEditPersonCommandExecute, CanEditPersonCommandExecute);
 
             //панель задач не скрывается при WindowState.Maximized
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
-        #region Methods
-        private bool FilterByName(object obj)
-        {
-            if (!string.IsNullOrEmpty(SearchValue) && obj is Person person) return person != null && person.Name.ToLower().Contains(SearchValue.ToLower());
-            return true;
-        }
-        private void AddNewPersonViewModel_PersonAdded(object sender, Person person)
-        {
-            Persons.Add(person);
-            PersonCollection.Refresh();
-        }
-        #endregion
+
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace ModernWPF_MVVM.ViewModels
 {
-    internal class AddNewPersonViewModel : ViewModel
+    internal class EditPersonViewModel : ViewModel
     {
         /// 
         /// Свойства
@@ -46,6 +46,22 @@ namespace ModernWPF_MVVM.ViewModels
         }
         #endregion
 
+        #region PersonToEdit
+        private Person _personToEdit;
+
+        public Person PersonToEdit
+        {
+            get { return _personToEdit; }
+            set
+            {
+                _personToEdit = value;
+                NameValue = _personToEdit.Name;
+                AdressValue = _personToEdit.Adress;
+                NumberValue = _personToEdit.Number;
+            }
+        }
+        #endregion
+
         /// 
         /// Команды
         /// 
@@ -64,52 +80,50 @@ namespace ModernWPF_MVVM.ViewModels
 
         #endregion
 
-        #region AddPersonCommand
-        public ICommand AddPersonCommand { get; }
+        #region EditPersonCommand
+        public ICommand EditPersonCommand { get; }
 
-        private void OnAddPersonCommandExecute(object p)
+        private void OnEditPersonCommandExecute(object p)
         {
-            var personNew = new Person
-            {
-                Name = _nameValue,
-                Adress = _adressValue,
-                Number = _numberValue,
-            };
+            // Примените изменения к редактируемому пользователю
+            PersonToEdit.Name = NameValue;
+            PersonToEdit.Adress = AdressValue;
+            PersonToEdit.Number = NumberValue;
 
-            // Создаем новую запись в базе данных
+            // Обновление данных в базе данных
             UserRepository userRepository = new UserRepository();
-            userRepository.AddUser(personNew);
+            userRepository.UpdateUser(PersonToEdit);
 
-            //вызываем событие добавление person
-            OnPersonAdded(personNew);
+            // Вызов события, чтобы оповестить о редактировании пользователя
+            OnPersonEdited(PersonToEdit);
 
-            MessageBoxCastom.SuccessWithColoredName("Пользователь ", personNew.Name.Trim(), Brushes.Green, " добавлен!");
+            MessageBoxCastom.SuccessWithColoredName("Пользователь ", PersonToEdit.Name.Trim(), Brushes.Green, " отредактирован!");
 
             //закрытие окна
             Window window = p as Window;
             window.Close();
         }
 
-        private bool CanAddPersonCommandExecute(object p) => _nameValue != null && _adressValue != null && _numberValue != null;
+        private bool CanEditPersonCommandExecute(object p) => true;
         #endregion
 
-        /// 
-        /// Ивенты
+        ///
+        /// events
         /// 
 
-        #region PersonAdded
-        public event EventHandler<Person> PersonAdded;
+        #region PersonEdited
+        public event EventHandler<Person> PersonEdited;
 
-        private void OnPersonAdded(Person person)
+        private void OnPersonEdited(Person person)
         {
-            PersonAdded?.Invoke(this, person);
+            PersonEdited?.Invoke(this, person);
         }
         #endregion
 
-        public AddNewPersonViewModel()
+        public EditPersonViewModel()
         {
             OkButtonCommand = new LambdaCommand(OnExecuteOkButtonCommand, CanExecuteOkButtonCommand);
-            AddPersonCommand = new LambdaCommand(OnAddPersonCommandExecute, CanAddPersonCommandExecute);
+            EditPersonCommand = new LambdaCommand(OnEditPersonCommandExecute, CanEditPersonCommandExecute);
         }
 
     }

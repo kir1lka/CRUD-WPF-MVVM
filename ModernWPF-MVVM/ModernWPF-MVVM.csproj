@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="Castom\MessageBoxCastom.cs" />
     <Compile Include="ViewModels\AddNewPersonViewModel.cs" />
+    <Compile Include="ViewModels\EditPersonViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="Views\Window\AddNewPersonWindow.xaml.cs">
       <DependentUpon>AddNewPersonWindow.xaml</DependentUpon>

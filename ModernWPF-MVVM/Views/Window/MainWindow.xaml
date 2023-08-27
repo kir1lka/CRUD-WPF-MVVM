@@ -150,7 +150,9 @@
                                         <Button x:Name="BtnEdit" 
                                                 Cursor="Hand"
                                                 Style="{StaticResource ButtonEditGridStyle}"
-                                                Margin="0 0 20 0"/>
+                                                Margin="0 0 20 0"
+                                                Command="{Binding Path=DataContext.EditPersonCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"
+                                                CommandParameter="{Binding Path=DataContext.SelectedItemGrid, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}"/>
                                         <Button x:Name="BtnDelete"
                                                 Cursor="Hand"
                                                 Style="{StaticResource ButtonDeleteGridStyle}"

@@ -7,6 +7,23 @@ namespace ModernWPF_MVVM.Repositories
 {
     internal class UserRepository : RepositoryBase
     {
+        public void UpdateUser(Person person)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "UPDATE [Persons] SET Name = @Name, Adress = @Adress, Number = @Number WHERE Id = @Id";
+
+                command.Parameters.AddWithValue("@Id", person.Id);
+                command.Parameters.AddWithValue("@Name", person.Name);
+                command.Parameters.AddWithValue("@Adress", person.Adress);
+                command.Parameters.AddWithValue("@Number", person.Number);
+
+                command.ExecuteNonQuery();
+            }
+        }
         public void DeleteUser(int userId)
         {
             using (var connection = GetConnection())
