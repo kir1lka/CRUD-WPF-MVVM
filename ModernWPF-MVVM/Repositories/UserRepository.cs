@@ -7,6 +7,36 @@ namespace ModernWPF_MVVM.Repositories
 {
     internal class UserRepository : RepositoryBase
     {
+        public void DeleteUser(int userId)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "DELETE FROM [Persons] WHERE Id = @Id";
+
+                command.Parameters.AddWithValue("@Id", userId);
+
+                command.ExecuteNonQuery();
+            }
+        }
+        public void AddUser(Person person)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "INSERT INTO [Persons] (Name, Adress, Number) VALUES (@Name, @Adress, @Number)";
+
+                command.Parameters.AddWithValue("@Name", person.Name);
+                command.Parameters.AddWithValue("@Adress", person.Adress);
+                command.Parameters.AddWithValue("@Number", person.Number);
+
+                command.ExecuteNonQuery();
+            }
+        }
 
         public ObservableCollection<Person> GetAllUsers()
         {

@@ -92,11 +92,6 @@
                           Grid.Row="0"
                           Grid.ColumnSpan="2">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-
                         <Grid Grid.Column="1">
 
                             <TextBox x:Name="TboxSearch"
@@ -128,10 +123,10 @@
                           >
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id"
+                        <!--<DataGridTextColumn Header="Id"
                                             IsReadOnly="True"
                                             Width="0.3*"
-                                            Binding="{Binding Id}"/>
+                                            Binding="{Binding Id}"/>-->
                         <DataGridTextColumn Header="Пользователь"
                                             IsReadOnly="True"
                                             Width="*"
@@ -144,14 +139,14 @@
                                             IsReadOnly="True"
                                             Width="*"
                                             Binding="{Binding Number}"/>
-                        <DataGridTemplateColumn Header=""
-                                            IsReadOnly="True"
-                                            Width="*">
+                        <DataGridTemplateColumn Header="Операции"
+                                                IsReadOnly="True"
+                                                Width="*">
 
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Center">
+                                                HorizontalAlignment="Left">
                                         <Button x:Name="BtnEdit" 
                                                 Cursor="Hand"
                                                 Style="{StaticResource ButtonEditGridStyle}"

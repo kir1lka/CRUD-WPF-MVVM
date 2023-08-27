@@ -1,4 +1,6 @@
-﻿namespace ModernWPF_MVVM.Views.Window
+﻿using System.Windows.Input;
+
+namespace ModernWPF_MVVM.Views.Window
 {
     /// <summary>
     /// Логика взаимодействия для AddNewPersonWindow.xaml
@@ -8,6 +10,14 @@
         public AddNewPersonWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

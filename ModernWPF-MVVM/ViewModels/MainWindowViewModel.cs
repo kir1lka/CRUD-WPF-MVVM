@@ -3,6 +3,7 @@ using ModernWPF_MVVM.Commands;
 using ModernWPF_MVVM.Models;
 using ModernWPF_MVVM.Repositories;
 using ModernWPF_MVVM.ViewModels.Base;
+using ModernWPF_MVVM.Views.Window;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -135,17 +136,14 @@ namespace ModernWPF_MVVM.ViewModels
 
         private void OnAddPersonCommandExecute(object p)
         {
-            var personNew = new Person
+            AddNewPersonViewModel addNewPersonViewModel = new AddNewPersonViewModel();
+            addNewPersonViewModel.PersonAdded += AddNewPersonViewModel_PersonAdded;
+            AddNewPersonWindow addNewPersonWindow = new AddNewPersonWindow
             {
-                Id = 10,
-                Name = "123",
-                Adress = "123",
-                Number = "123",
+                DataContext = addNewPersonViewModel
             };
+            addNewPersonWindow.ShowDialog();
 
-            Persons.Add(personNew);
-
-            MessageBoxCastom.SuccessWithColoredName("Пользователь ", personNew.Name.Trim(), Brushes.Red, " добавлен!");
         }
 
         private bool CanAddPersonCommandExecute(object p) => true;
@@ -158,11 +156,13 @@ namespace ModernWPF_MVVM.ViewModels
         {
             if (!(p is Person person)) return;
 
-            MessageBoxCastom.SuccessWithColoredName("Пользователь ", person.Name.Trim(), Brushes.Red, " удален!");
+            // Удаление записи о пользователе из базы данных
+            UserRepository userRepository = new UserRepository();
+            userRepository.DeleteUser(person.Id);
 
-            var index_group = Persons.IndexOf(person);
             Persons.Remove(person);
 
+            MessageBoxCastom.SuccessWithColoredName("Пользователь ", person.Name.Trim(), Brushes.Red, " удален!");
         }
 
         private bool CanDeletePersonCommandExecute(object p) => true;
@@ -177,6 +177,7 @@ namespace ModernWPF_MVVM.ViewModels
             Persons = new ObservableCollection<Person>(userRepository.GetAllUsers());
             PersonCollection = CollectionViewSource.GetDefaultView(Persons);
 
+            //поиск
             PersonCollection.Filter = FilterByName;
 
             //команды
@@ -187,20 +188,20 @@ namespace ModernWPF_MVVM.ViewModels
             AddPersonCommand = new LambdaCommand(OnAddPersonCommandExecute, CanAddPersonCommandExecute);
             DeletePersonCommand = new LambdaCommand(OnDeletePersonCommandExecute, CanDeletePersonCommandExecute);
 
-            //панель задач не скрывается
+            //панель задач не скрывается при WindowState.Maximized
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         #region Methods
         private bool FilterByName(object obj)
         {
-            if (!string.IsNullOrEmpty(SearchValue))
-            {
-                var person = obj as Person;
-                return person != null && person.Name.ToLower().Contains(SearchValue.ToLower());
-            }
-
+            if (!string.IsNullOrEmpty(SearchValue) && obj is Person person) return person != null && person.Name.ToLower().Contains(SearchValue.ToLower());
             return true;
+        }
+        private void AddNewPersonViewModel_PersonAdded(object sender, Person person)
+        {
+            Persons.Add(person);
+            PersonCollection.Refresh();
         }
         #endregion
     }

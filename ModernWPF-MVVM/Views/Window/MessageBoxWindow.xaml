@@ -107,7 +107,7 @@
                                    FontFamily="Roboto"
                                    FontWeight="Heavy"
                                    FontSize="20"
-                                   Foreground="#FF0000"/>
+                                   Foreground="{Binding NameColor}"/>
 
                         <TextBlock Text="{Binding AdditionalText}" 
                                    FontWeight="Bold"

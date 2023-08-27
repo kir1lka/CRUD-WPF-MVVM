@@ -5,8 +5,152 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModernWPF_MVVM.Views.Window"
         mc:Ignorable="d"
-        Title="AddNewPersonWindow" Height="450" Width="800">
-    <Grid>
         
-    </Grid>
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:viem="clr-namespace:ModernWPF_MVVM.ViewModels"
+        
+        Title="AddNewPersonWindow" 
+        Name="window"
+        
+        Height="400" Width="350"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        
+        MouseDown="Window_MouseDown">
+
+    <Window.DataContext>
+        <viem:AddNewPersonViewModel/>
+    </Window.DataContext>
+    
+    <Border CornerRadius="8 8 8 8" 
+            BorderThickness="2"
+            BorderBrush="#FDB87D"
+            x:Name="borderHeader">
+
+        <Border.Background>
+            <ImageBrush ImageSource="../../img/background.jpg" Stretch="None"/>
+        </Border.Background>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+
+                <StackPanel Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal">
+
+                    <TextBlock Text="Новый пользователь" 
+                               TextAlignment="Center"
+                               FontFamily="Roboto"
+                               FontWeight="Heavy"
+                               FontSize="20"
+                               Foreground="#FDB87D"
+                               Margin="5">
+                        <TextBlock.BitmapEffect>
+                            <DropShadowBitmapEffect Color="#A79382" 
+                                                    Direction="-80"
+                                                    Softness="0" 
+                                                    ShadowDepth="1.5" 
+                                                    Opacity="0.6"/>
+                        </TextBlock.BitmapEffect>
+
+                    </TextBlock>
+                </StackPanel>
+
+                <Button Cursor="Hand"
+                            x:Name="BtnClose"
+                            Style="{StaticResource ButtonCloseStyle}"
+                            Command="{Binding OkButtonCommand}"
+                            CommandParameter="{Binding ElementName=window}">
+                </Button>
+
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                
+                <StackPanel Orientation="Vertical"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top">
+
+                    <!--<TextBlock Text="Новый пользователь" 
+                               TextAlignment="Left"
+                               FontFamily="Roboto"
+                               FontWeight="Heavy"
+                               FontSize="16"
+                               Foreground="#FDB87D"
+                               Margin="5">
+                        <TextBlock.BitmapEffect>
+                            <DropShadowBitmapEffect Color="#A79382" 
+                                                    Direction="-80"
+                                                    Softness="0" 
+                                                    ShadowDepth="1.5" 
+                                                    Opacity="0.6"/>
+                        </TextBlock.BitmapEffect>
+
+                    </TextBlock>-->
+
+                    <Grid Margin="0 20 0 0" 
+                          Grid.Row="1">
+
+                        <Grid Grid.Column="1">
+
+                            <TextBox Text="{Binding NameValue}"
+                                     Tag="Имя"
+                                     Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0 20 0 0" 
+                          Grid.Row="1">
+
+                        <Grid Grid.Column="1">
+
+                            <TextBox Text="{Binding AdressValue}"
+                                     Tag="Адресс"
+                                     Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0 20 0 0" 
+                          Grid.Row="1">
+
+                        <Grid Grid.Column="1">
+
+                            <TextBox Text="{Binding NumberValue}"
+                                     Tag="Номер"
+                                     Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <!--bottom-->
+            <Grid Grid.Row="3"
+                  Grid.Column="1">
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0 0 10 0">
+
+                    <Button Content="Добавить"
+                            Style="{StaticResource ButtonAddStyle}"
+                            Cursor="Hand"
+                            Command="{Binding AddPersonCommand}"
+                            CommandParameter="{Binding ElementName=window}"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
+    </Border>
 </Window>

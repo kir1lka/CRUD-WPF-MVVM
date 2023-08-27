@@ -19,14 +19,26 @@ namespace ModernWPF_MVVM.Castom
             messageBoxWindow.DataContext = messageBoxViewModel;
             messageBoxWindow.Show();
         }
-        public static void Success(string text)
+        public static void ErrorMessage(string startText)
         {
             MessageBoxViewModel messageBoxViewModel = new MessageBoxViewModel();
-            messageBoxViewModel.Name = text;
+            messageBoxViewModel.StartText = startText;
+            messageBoxViewModel.Name = "";
+            messageBoxViewModel.NameColor = Brushes.Red;
+            messageBoxViewModel.AdditionalText = "";
+
             MessageBoxWindow messageBoxWindow = new MessageBoxWindow();
             messageBoxWindow.DataContext = messageBoxViewModel;
             messageBoxWindow.Show();
         }
+        //public static void Success(string text)
+        //{
+        //    MessageBoxViewModel messageBoxViewModel = new MessageBoxViewModel();
+        //    messageBoxViewModel.Name = text;
+        //    MessageBoxWindow messageBoxWindow = new MessageBoxWindow();
+        //    messageBoxWindow.DataContext = messageBoxViewModel;
+        //    messageBoxWindow.Show();
+        //}
         //public static void MessageCastomError(string text)
         //{
         //    MessageBoxViewModel messageBoxViewModel = new MessageBoxViewModel();
