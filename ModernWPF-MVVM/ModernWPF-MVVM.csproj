@@ -201,11 +201,8 @@
     <Resource Include="img\normalWindowIcons\GroupPassive.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Persons1.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Data\Persons1.mdf" />
     <Content Include="Data\Persons1_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Persons1.mdf</DependentUpon>
     </Content>
   </ItemGroup>
