@@ -139,14 +139,15 @@
                                             IsReadOnly="True"
                                             Width="*"
                                             Binding="{Binding Number}"/>
-                        <DataGridTemplateColumn Header="Операции"
+                        <DataGridTemplateColumn Header=""
                                                 IsReadOnly="True"
-                                                Width="*">
+                                                Width="*"
+                                                >
 
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Left">
+                                                HorizontalAlignment="Center">
                                         <Button x:Name="BtnEdit" 
                                                 Cursor="Hand"
                                                 Style="{StaticResource ButtonEditGridStyle}"

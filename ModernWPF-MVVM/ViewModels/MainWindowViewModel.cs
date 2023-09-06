@@ -161,9 +161,9 @@ namespace ModernWPF_MVVM.ViewModels
             UserRepository userRepository = new UserRepository();
             userRepository.DeleteUser(person.Id);
 
-            Persons.Remove(person);
-
             MessageBoxCastom.SuccessWithColoredName("Пользователь ", person.Name.Trim(), Brushes.Red, " удален!");
+
+            Persons.Remove(person);
         }
 
         private bool CanDeletePersonCommandExecute(object p) => true;
@@ -188,7 +188,7 @@ namespace ModernWPF_MVVM.ViewModels
         #endregion
 
         ///
-        /// Methods for events
+        /// Методы для events
         ///
 
         #region FilterByName 

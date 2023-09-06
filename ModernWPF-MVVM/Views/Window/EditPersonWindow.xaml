@@ -12,7 +12,7 @@
         Title="EditPersonWindow" 
         Name="window"
         
-        Height="300" Width="350"
+        Height="380" Width="350"
         
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -134,6 +134,27 @@
                                      Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                     </Grid>
+
+                    <Grid Margin="0 20 0 0" 
+                          Grid.Row="1">
+
+                        <Grid Grid.Column="1">
+
+                            <TextBox Text="{Binding DescriptionValue}"
+                                     Tag="Описание"
+                                     Style="{StaticResource TextBoxBigStyle}"
+                                     TextWrapping="Wrap"
+                                     Height="80"/>
+                        </Grid>
+                    </Grid>
+
+                    <Label Content="{Binding LabelTextError}"
+                           FontFamily="Roboto"
+                           FontWeight="DemiBold"
+                           FontSize="15"
+                           Foreground="Red"
+                           HorizontalAlignment="Center"
+                           Margin="0 10 0 0"/>
                 </StackPanel>
             </Grid>
 

@@ -16,6 +16,16 @@ namespace ModernWPF_MVVM.ViewModels
         /// Свойства
         /// 
 
+        #region LabelTextError
+        private string _labelTextError;
+
+        public string LabelTextError
+        {
+            get { return _labelTextError; }
+            set { Set(ref _labelTextError, value); }
+        }
+        #endregion
+
         #region NameValue
         private string _nameValue;
 
@@ -46,6 +56,16 @@ namespace ModernWPF_MVVM.ViewModels
         }
         #endregion
 
+        #region DescriptionValue
+        private string _descriptionValue;
+
+        public string DescriptionValue
+        {
+            get { return _descriptionValue; }
+            set { Set(ref _descriptionValue, value); }
+        }
+        #endregion
+
         /// 
         /// Команды
         /// 
@@ -69,28 +89,39 @@ namespace ModernWPF_MVVM.ViewModels
 
         private void OnAddPersonCommandExecute(object p)
         {
-            var personNew = new Person
+            if (_nameValue != null && _adressValue != null && _numberValue != null && _descriptionValue != null)
             {
-                Name = _nameValue,
-                Adress = _adressValue,
-                Number = _numberValue,
-            };
+                if (!(_nameValue == "" && _adressValue == "" && _numberValue == "" && _descriptionValue == ""))
+                {
+                    var personNew = new Person
+                    {
+                        Name = _nameValue,
+                        Adress = _adressValue,
+                        Number = _numberValue,
+                        Description = _descriptionValue,
+                    };
 
-            // Создаем новую запись в базе данных
-            UserRepository userRepository = new UserRepository();
-            userRepository.AddUser(personNew);
+                    // новая запись в бд
+                    UserRepository userRepository = new UserRepository();
+                    userRepository.AddUser(personNew);
 
-            //вызываем событие добавление person
-            OnPersonAdded(personNew);
+                    //вызываем событие добавление person
+                    OnPersonAdded(personNew);
 
-            MessageBoxCastom.SuccessWithColoredName("Пользователь ", personNew.Name.Trim(), Brushes.Green, " добавлен!");
+                    MessageBoxCastom.SuccessWithColoredName("Пользователь ", personNew.Name.Trim(), Brushes.Green, " добавлен!");
 
-            //закрытие окна
-            Window window = p as Window;
-            window.Close();
+                    //закрытие окна
+                    Window window = p as Window;
+                    window.Close();
+                }
+                else
+                    LabelTextError = "Заполните поля*";
+            }
+            else
+                LabelTextError = "Заполните поля*";
         }
 
-        private bool CanAddPersonCommandExecute(object p) => _nameValue != null && _adressValue != null && _numberValue != null;
+        private bool CanAddPersonCommandExecute(object p) => true;
         #endregion
 
         /// 

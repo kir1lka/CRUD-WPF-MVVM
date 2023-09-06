@@ -14,14 +14,16 @@ namespace ModernWPF_MVVM.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "UPDATE [Persons] SET Name = @Name, Adress = @Adress, Number = @Number WHERE Id = @Id";
+                command.CommandText = "UPDATE [Persons] SET Name = @Name, Adress = @Adress, Number = @Number, Description = @Description WHERE Id = @Id";
 
                 command.Parameters.AddWithValue("@Id", person.Id);
                 command.Parameters.AddWithValue("@Name", person.Name);
                 command.Parameters.AddWithValue("@Adress", person.Adress);
                 command.Parameters.AddWithValue("@Number", person.Number);
+                command.Parameters.AddWithValue("@Description", person.Description);
 
                 command.ExecuteNonQuery();
+
             }
         }
         public void DeleteUser(int userId)
@@ -45,11 +47,17 @@ namespace ModernWPF_MVVM.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO [Persons] (Name, Adress, Number) VALUES (@Name, @Adress, @Number)";
+                command.CommandText = "INSERT INTO [Persons] (Name, Adress, Number, Description) VALUES (@Name, @Adress, @Number, @Description)";
 
                 command.Parameters.AddWithValue("@Name", person.Name);
                 command.Parameters.AddWithValue("@Adress", person.Adress);
                 command.Parameters.AddWithValue("@Number", person.Number);
+                command.Parameters.AddWithValue("@Description", person.Description);
+                //SqlParameter descriptionParam = command.Parameters.AddWithValue("@Description", person.Description);
+                //if (person.Description == null)
+                //{
+                //    descriptionParam.Value = DBNull.Value;
+                //}
 
                 command.ExecuteNonQuery();
             }
@@ -74,7 +82,8 @@ namespace ModernWPF_MVVM.Repositories
                             Id = reader.GetInt32(0),
                             Name = reader.GetString(1),
                             Adress = reader.GetString(2),
-                            Number = reader.GetString(3)
+                            Number = reader.GetString(3),
+                            Description = reader.GetString(4)
                         });
                     }
                 }

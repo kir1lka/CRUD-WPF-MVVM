@@ -16,6 +16,26 @@ namespace ModernWPF_MVVM.ViewModels
         /// Свойства
         /// 
 
+        #region LabelTextError
+        private string _labelTextError;
+
+        public string LabelTextError
+        {
+            get { return _labelTextError; }
+            set { Set(ref _labelTextError, value); }
+        }
+        #endregion
+
+        #region DescriptionValue
+        private string _descriptionValue;
+
+        public string DescriptionValue
+        {
+            get { return _descriptionValue; }
+            set { Set(ref _descriptionValue, value); }
+        }
+        #endregion
+
         #region NameValue
         private string _nameValue;
 
@@ -58,6 +78,7 @@ namespace ModernWPF_MVVM.ViewModels
                 NameValue = _personToEdit.Name;
                 AdressValue = _personToEdit.Adress;
                 NumberValue = _personToEdit.Number;
+                DescriptionValue = _personToEdit.Description;
             }
         }
         #endregion
@@ -85,23 +106,35 @@ namespace ModernWPF_MVVM.ViewModels
 
         private void OnEditPersonCommandExecute(object p)
         {
-            // Примените изменения к редактируемому пользователю
-            PersonToEdit.Name = NameValue;
-            PersonToEdit.Adress = AdressValue;
-            PersonToEdit.Number = NumberValue;
+            if (_nameValue != null && _adressValue != null && _numberValue != null && _descriptionValue != null)
+            {
+                if (!(_nameValue == "" && _adressValue == "" && _numberValue == "" && _descriptionValue == ""))
+                {
 
-            // Обновление данных в базе данных
-            UserRepository userRepository = new UserRepository();
-            userRepository.UpdateUser(PersonToEdit);
+                    // новые данные person
+                    PersonToEdit.Name = NameValue;
+                    PersonToEdit.Adress = AdressValue;
+                    PersonToEdit.Number = NumberValue;
+                    PersonToEdit.Description = DescriptionValue;
 
-            // Вызов события, чтобы оповестить о редактировании пользователя
-            OnPersonEdited(PersonToEdit);
+                    // обновление данных в бд
+                    UserRepository userRepository = new UserRepository();
+                    userRepository.UpdateUser(PersonToEdit);
 
-            MessageBoxCastom.SuccessWithColoredName("Пользователь ", PersonToEdit.Name.Trim(), Brushes.Green, " отредактирован!");
+                    // вызов события чтобы оповестить о редактировании person
+                    OnPersonEdited(PersonToEdit);
 
-            //закрытие окна
-            Window window = p as Window;
-            window.Close();
+                    MessageBoxCastom.SuccessWithColoredName("Пользователь ", PersonToEdit.Name.Trim(), Brushes.Green, " отредактирован!");
+
+                    //закрытие окна
+                    Window window = p as Window;
+                    window.Close();
+                }
+                else
+                    LabelTextError = "Заполните поля*";
+            }
+            else
+                LabelTextError = "Заполните поля*";
         }
 
         private bool CanEditPersonCommandExecute(object p) => true;
