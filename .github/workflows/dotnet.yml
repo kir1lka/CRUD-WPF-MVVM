@@ -5,14 +5,10 @@ on: [push,pull_request]
 jobs:
   build:
     name: Initialize build .NET
-    runs-on: windows-latest
+    runs-on: windows-2019 # Используем окружение с .NET Framework 4.8
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET Framework 4.8
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: "4.8"
     - name: Restore dependencies
       run: nuget restore
     - name: Build
