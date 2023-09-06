@@ -1,10 +1,6 @@
 name: .NET
 
-on:
-  push:
-    branches: [ "1.0.0" ]
-  pull_request:
-    branches: [ "1.0.0" ]
+on: [push,pull_request]
 
 jobs:
   build:
@@ -13,13 +9,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    - name: Setup .NET Framework 4.8
+      uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: "4.8"
     - name: Restore dependencies
-      run: dotnet restore
+      run: nuget restore
     - name: Build
-      run: dotnet build -c Release --no-restore
+      run: msbuild /p:Configuration=Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
