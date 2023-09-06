@@ -1,0 +1,21 @@
+name: .NET
+
+on: [push,pull_request]
+
+jobs:
+  build:
+    name: Initialize build .NET
+    runs-on: windows-2019 
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1 
+      with:
+        msbuild-version: latest 
+    - name: Restore dependencies
+      run: nuget restore
+    - name: Build
+      run: msbuild /p:Configuration=Release
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
