@@ -86,5 +86,6 @@ namespace ModernWPF_MVVM
             //}
             #endregion
         }
+
     }
 }

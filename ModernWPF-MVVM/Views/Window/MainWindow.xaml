@@ -40,8 +40,10 @@
             <ImageBrush ImageSource="../../img/background.jpg" Stretch="None"/>
         </Border.Background>
 
+        
         <Grid>
-            
+
+       
             <!--СЕТКА-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
@@ -82,30 +84,74 @@
             <!--HEADER-->
             <Grid Grid.Row="1"
                   Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="333*"/>
+                    <ColumnDefinition Width="383*"/>
+                </Grid.ColumnDefinitions>
 
-                <!--TEXTBOX SEARCH-->
-                <StackPanel Margin="0 0 0 0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center">
-                    
-                    <Grid Margin="0 0 0 0" 
-                          Grid.Row="0"
-                          Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
 
-                        <Grid Grid.Column="1">
+                    <!--TEXTBOX SEARCH-->
+                    <StackPanel Margin="0 0 15 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center">
 
-                            <TextBox x:Name="TboxSearch"
-                                     Text="{Binding SearchValue,UpdateSourceTrigger=PropertyChanged}"
-                                     Tag="Поиск"
-                                     Style="{StaticResource TextBoxSearchStyle}"/>
-                            
-                            <fa:ImageAwesome Width="14" Icon="Search"
-                                             HorizontalAlignment="Left"
-                                             Margin="10 0 0 1"/>
+                        <Grid Margin="0 0 0 0" 
+                              Grid.Row="0"
+                              Grid.ColumnSpan="2">
+
+                            <Grid Grid.Column="1">
+
+                                <TextBox x:Name="TboxSearch"
+                                         Text="{Binding SearchValue,UpdateSourceTrigger=PropertyChanged}"
+                                         Tag="Поиск"
+                                         Style="{StaticResource TextBoxSearchStyle}"/>
+
+                                <fa:ImageAwesome Width="14" Icon="Search"
+                                                 HorizontalAlignment="Left"
+                                                 Margin="10 0 0 1"/>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </StackPanel>
+
+                    <!--BUTTON (COMBOBOX) ICONS-->
+
+                    <Button Style="{StaticResource ComboBoxBtn}" 
+                            Cursor="Hand"
+                            Command="{Binding VisibilityComboBoxCommand}">
+                        <!--FocusableButtonComboBox в Style="{StaticResource ComboBoxBtn}-->
+
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Width="14" Icon="Filter"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    
                 </StackPanel>
             </Grid>
+
+            <!--open COMBOBOX-->
+            <Grid 
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Height="120" 
+                Width="150" 
+                Panel.ZIndex="99"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="280 10 0 0"
+                Visibility="{Binding VisibilityComboBox}">
+
+                <Border CornerRadius="8"
+                        Background="White"
+                        BorderBrush="#FDB87D"
+                        BorderThickness="2">
+                    
+                </Border>
+                
+            </Grid>
+
 
             <!--BODY таблица-->
             <Grid Grid.Row="2"
@@ -139,7 +185,7 @@
                                             IsReadOnly="True"
                                             Width="*"
                                             Binding="{Binding Number}"/>
-                        <DataGridTemplateColumn Header=""
+                        <DataGridTemplateColumn Header="Операции"
                                                 IsReadOnly="True"
                                                 Width="*"
                                                 >
@@ -147,7 +193,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Center">
+                                                HorizontalAlignment="Left">
                                         <Button x:Name="BtnEdit" 
                                                 Cursor="Hand"
                                                 Style="{StaticResource ButtonEditGridStyle}"
