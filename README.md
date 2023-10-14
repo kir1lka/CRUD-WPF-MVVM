@@ -1,6 +1,6 @@
 # Мое приложение для управления данными о пользователях
 
-![Вставьте здесь изображение вашего приложения](https://4.downloader.disk.yandex.ru/preview/92dade93c928987bc42151c52b484ef3fff4ea7ba997daa5499ba54da6b4f8a2/inf/amuMr_Pj_XkvHFzUcBf-gWMVT6qxeF-234wX2A_tOsE4E-L-WCmorgyUa_koZ0SUrTBLJlbt_8EXZvtXz5quMQ%3D%3D?uid=1580271933&filename=ImgRead.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=1580271933&tknv=v2&size=1898x947](https://disk.yandex.ru/client/disk?source=main-loginmenu&idApp=client&dialog=slider&idDialog=%2Fdisk%2FImgRead.png)
+![Вставьте здесь изображение вашего приложения](https://img.freepik.com/free-photo/a-cupcake-with-a-strawberry-on-top-and-a-strawberry-on-the-top_1340-35087.jpg)
 
 Добро пожаловать в приложение для управления данными о пользователях! Это приложение позволит вам добавить, удалить и редактировать информацию о людях. В таблице отображается информация о пользователе, включая его имя, адрес и номер телефона. Вы также можете выполнять операции по редактированию и удалению пользователей.
 
