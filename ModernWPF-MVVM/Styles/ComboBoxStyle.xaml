@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--ComboBox-->
+    
     <Style x:Key="ComboBoxBtn" TargetType="Button">
 
         <Setter Property="Width" Value="30"/>
@@ -77,6 +79,108 @@
                         <DataTrigger Binding="{Binding FocusableButtonComboBox}" Value="True">
                              <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}" />
                          </DataTrigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <!--ButtonComboBoxFirstStyle-->
+
+    <Style x:Key="ButtonComboBoxFirstStyle" TargetType="Button">
+
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Margin" Value="5 5 5 0"/>
+
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#9B9B9B"/>
+        <Setter Property="BorderThickness" Value="2"/>
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Border Name="border" 
+                            CornerRadius="06"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        
+                        <!--<Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FDB87D"/>
+                        </Trigger>-->
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FDB87D"/>
+                        </Trigger>
+
+                        <!--mvvm-->
+
+                        <DataTrigger Binding="{Binding IsFocusedFilterComboBoxFirst}" Value="True">
+                            <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}" />
+                        </DataTrigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <!--ButtonComboBoxTwoStyle-->
+
+    <Style x:Key="ButtonComboBoxTwoStyle" TargetType="Button">
+
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Margin" Value="5 5 5 0"/>
+
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#9B9B9B"/>
+        <Setter Property="BorderThickness" Value="2"/>
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Border Name="border" 
+                            CornerRadius="06"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FDB87D"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FDB87D"/>
+                        </Trigger>
+
+                        <!--mvvm-->
+
+                        <DataTrigger Binding="{Binding IsFocusedFilterComboBoxTwo}" Value="True">
+                            <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}" />
+                        </DataTrigger>
 
                     </ControlTemplate.Triggers>
 

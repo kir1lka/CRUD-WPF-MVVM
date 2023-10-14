@@ -90,27 +90,6 @@ namespace ModernWPF_MVVM.ViewModels
         }
         #endregion
 
-        #region VisibilityComboBox
-        private Visibility _visibilityComboBox = Visibility.Hidden;
-
-        public Visibility VisibilityComboBox
-        {
-            get { return _visibilityComboBox; }
-            set { Set(ref _visibilityComboBox, value); }
-        }
-        #endregion
-
-        #region FocusableButtonComboBox
-        private bool _focusableButtonComboBox = false;
-
-        public bool FocusableButtonComboBox
-        {
-            get { return _focusableButtonComboBox; }
-            set { Set(ref _focusableButtonComboBox, value); }
-        }
-        #endregion
-
-
         /// 
         /// Команды
         /// 
@@ -208,28 +187,6 @@ namespace ModernWPF_MVVM.ViewModels
         private bool CanEditPersonCommandExecute(object p) => true;
         #endregion
 
-        #region VisibilityComboBoxCommand
-        public ICommand VisibilityComboBoxCommand { get; }
-
-        private void OnVisibilityComboBoxCommandExecute(object p)
-        {
-            if (VisibilityComboBox == Visibility.Hidden)
-            {
-                FocusableButtonComboBox = true;
-                VisibilityComboBox = Visibility.Visible;
-
-            }
-            else
-            {
-                FocusableButtonComboBox = false;
-                VisibilityComboBox = Visibility.Hidden;
-            }
-        }
-
-        private bool CanVisibilityComboBoxCommandExecute(object p) => true;
-        #endregion
-
-
         ///
         /// Методы для events
         ///
@@ -283,8 +240,6 @@ namespace ModernWPF_MVVM.ViewModels
             AddPersonCommand = new LambdaCommand(OnAddPersonCommandExecute, CanAddPersonCommandExecute);
             DeletePersonCommand = new LambdaCommand(OnDeletePersonCommandExecute, CanDeletePersonCommandExecute);
             EditPersonCommand = new LambdaCommand(OnEditPersonCommandExecute, CanEditPersonCommandExecute);
-
-            VisibilityComboBoxCommand = new LambdaCommand(OnVisibilityComboBoxCommandExecute, CanVisibilityComboBoxCommandExecute);
 
             //панель задач не скрывается при WindowState.Maximized
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;

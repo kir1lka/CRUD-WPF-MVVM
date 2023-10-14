@@ -30,7 +30,7 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
 
-    <!--ОБВОДКА И ФОН-->
+    <!-- Border and background-->
     <Border CornerRadius="8 8 0 8" 
             BorderThickness="2"
             BorderBrush="#FDB87D"
@@ -58,7 +58,7 @@
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
-            <!--Кнопка CLOSED and MINIMAZE-->
+            <!--buttons CLOSED and MINIMAZE-->
             <StackPanel Orientation="Horizontal"
                         Grid.Row="0"
                         Grid.ColumnSpan="3" 
@@ -92,7 +92,7 @@
                 <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
 
                     <!--TEXTBOX SEARCH-->
-                    <StackPanel Margin="0 0 15 0"
+                    <StackPanel Margin="0 0 10 0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
 
@@ -114,46 +114,11 @@
                         </Grid>
                     </StackPanel>
 
-                    <!--BUTTON (COMBOBOX) ICONS-->
-
-                    <Button Style="{StaticResource ComboBoxBtn}" 
-                            Cursor="Hand"
-                            Command="{Binding VisibilityComboBoxCommand}">
-                        <!--FocusableButtonComboBox в Style="{StaticResource ComboBoxBtn}-->
-
-                        <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Width="14" Icon="Filter"/>
-                        </StackPanel>
-                    </Button>
-                    
-                    
+                   
                 </StackPanel>
             </Grid>
 
-            <!--open COMBOBOX-->
-            <Grid 
-                Grid.Row="1"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Height="120" 
-                Width="150" 
-                Panel.ZIndex="99"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Margin="280 10 0 0"
-                Visibility="{Binding VisibilityComboBox}">
-
-                <Border CornerRadius="8"
-                        Background="White"
-                        BorderBrush="#FDB87D"
-                        BorderThickness="2">
-                    
-                </Border>
-                
-            </Grid>
-
-
-            <!--BODY таблица-->
+            <!--BODY table-->
             <Grid Grid.Row="2"
                   Grid.Column="1">
 
@@ -169,10 +134,7 @@
                           >
 
                     <DataGrid.Columns>
-                        <!--<DataGridTextColumn Header="Id"
-                                            IsReadOnly="True"
-                                            Width="0.3*"
-                                            Binding="{Binding Id}"/>-->
+                        
                         <DataGridTextColumn Header="Пользователь"
                                             IsReadOnly="True"
                                             Width="*"
